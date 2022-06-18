@@ -1,6 +1,21 @@
+import sys
 from mididings import *
 
 channel_controls = dict()
+
+control_port = 1
+
+if(len(sys.argv)>1):
+    config(
+        in_ports=[ ("controller", "MPK mini.*") ],
+        out_ports= [ (name.lower().replace(" ","-"), name+".*") for name in sys.argv[1:] ]
+    )
+else:
+    control_port = 2
+    config(
+        in_ports = [ ("controller") ],
+        out_ports = [ ("instrument"), ("control") ]
+    )
 
 def set_control(channel, control, value):
     global channel_controls
@@ -20,6 +35,7 @@ def handle_control(ev):
         if c > 127:
             c = 127
         ev.value = int(c)
+        ev.port = control_port
         set_control(ev.channel, ev.ctrl, c)
     return ev
 
