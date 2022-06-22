@@ -11,16 +11,18 @@ from liblo import (
 )
 
 class Channel:
-    name = "..."
-    controls = dict()
+    def __init__(self):
+        self.name = "..."
+        self.controls = dict()
     def __repr__(self):
         return "<"+self.name+"> "+str(self.controls)
 
 class Control:
-    name = "..."
-    value = 0.0
-    min = 0.0
-    max = 0.0
+    def __init__(self):
+        self.name = "..."
+        self.value = 0.0
+        self.min = 0.0
+        self.max = 0.0
 
     def __repr__(self):
         return "<"+self.name+"> {"+str(self.min)+".."+str(self.max)+"} "+str(self.value)
