@@ -1,5 +1,8 @@
 #/bin/sh
 
+xset -dpms
+xset s off
+
 jackd -dalsa -dhw:SB,0 -r44100 -p1024 -n2 &
 
 sleep 2
